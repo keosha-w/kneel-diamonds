@@ -1,10 +1,13 @@
-import { getSizes, getStyles } from "./database.js"
+import { getSizes, getStyles, setStyle } from "./database.js"
 const sizes = getSizes()
 const styles = getStyles()
 
 document.addEventListener(
     "change",
     (event) => {
+        if (event.target.name === "style") {
+            setStyle(parseInt(event.target.value))
+        }
     }
 )
 
@@ -15,7 +18,7 @@ export const JewelryStyles = () => {
     const listItems = styles.map(
         (style) => {
             return `<li>
-            <input type="radio" name="size" value="${style.id}" /> ${style.style}
+            <input type="radio" name="style" value="${style.id}" /> ${style.style}
             </li>`
         }
     )
