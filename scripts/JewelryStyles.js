@@ -22,8 +22,6 @@ export const JewelryStyles = () => {
             </li>`
         }
     )
-
-
     // Join all of the strings in the array into a single string
     html += listItems.join("")
 

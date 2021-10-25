@@ -8,10 +8,8 @@ const renderAllHTML = () => {
 
 renderAllHTML()
 
-//the responsibility of this event listener is to listen for the state changed event and generate all the HTML
-
 document.addEventListener("stateChanged", event => {
-    console.log ("State of data has changed. Regenerating HTML...")
+    console.log("State of data has changed. Regenerating HTML...")
     renderAllHTML()
 })
 
