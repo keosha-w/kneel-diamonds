@@ -25,6 +25,15 @@ const database = {
         { id: 4, metal: "Platinum", price: 795.45 },
         { id: 5, metal: "Palladium", price: 1241.0 }
     ],
+    orders: [
+        {
+            id: 1, 
+            metalId: 3, 
+            sizeId: 2, 
+            styleId: 3, 
+            timestamp: 1614759931693
+        },
+    ],
     
     orderBuilder: {},
 }
@@ -39,7 +48,7 @@ export const getStyles = () => {
     return database.styles.map(style => ({...style}))
 }
 export const getOrders = () => {
-    return database.customOrders.map(order => ({...order}))
+    return database.orders.map(order => ({...order}))
 }
 
 //Export functions whose responsibility is to set state
@@ -54,4 +63,28 @@ export const setSize = (id) => {
 
 export const setStyle = (id) => {
     database.orderBuilder.styleId = id
+}
+
+// Functions whose responsibility is to build a new custom order
+
+export const addCustomOrder = () => {
+
+//copy the currnet state of user choices
+const newOrder = {...database.orderBuilder}
+
+//add a new primary key to the object
+const lastIndex = database.orders.length - 1
+newOrder.id = database.orders[lastIndex].id + 1
+
+// add a timestamp to the order
+newOrder.timestamp = Date.now()
+
+//add the new object to custom orders state
+database.orders.push(newOrder)
+
+//reset the temporary state for user choices
+database.orderBuilder = {}
+
+//broadcast a new notification that permanent state has changed
+document.dispatchEvent(new CustomEvent("stateChanged"))
 }
