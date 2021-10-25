@@ -25,6 +25,7 @@ const database = {
         { id: 4, metal: "Platinum", price: 795.45 },
         { id: 5, metal: "Palladium", price: 1241.0 }
     ],
+
     orders: [
         {
             id: 1, 
@@ -37,6 +38,8 @@ const database = {
     
     orderBuilder: {},
 }
+
+// Export functions whose responsibility is to export copies of the databases
 
 export const getMetals = () => {
     return database.metals.map(metal => ({...metal}))
@@ -87,4 +90,5 @@ database.orderBuilder = {}
 
 //broadcast a new notification that permanent state has changed
 document.dispatchEvent(new CustomEvent("stateChanged"))
+
 }
